@@ -1,0 +1,4 @@
+app:
+  webhook_url:
+  password_retention_minute: 5
+  port: 8080

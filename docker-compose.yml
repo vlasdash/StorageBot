@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  password_bot:
+    container_name: password_bot_app
+    build: .
+    ports:
+      - '8080:8080'
+    restart: on-failure
+    env_file:
+      .env.example
+    depends_on:
+      - mysql
+    networks:
+      - password_bot
+
+  mysql:
+    image: mysql:8
+    container_name: password_bot_db
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      .env.example
+    ports:
+      - '3306:3306'
+    volumes:
+      - './init/migrations/:/docker-entrypoint-initdb.d/'
+    networks:
+      - password_bot
+
+networks:
+  password_bot:
+    driver: bridge
+
