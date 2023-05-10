@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/joho/godotenv"
 	"github.com/vlasdash/passwordbot/config"
 	"github.com/vlasdash/passwordbot/init/db"
 	"github.com/vlasdash/passwordbot/internal/credential"
@@ -17,8 +16,6 @@ import (
 const ConfigPath = "./config/"
 
 func startPasswordStorageBot(ctx context.Context) error {
-	_ = godotenv.Load(".env.example")
-
 	err := config.LoadConfig(ConfigPath)
 	if err != nil {
 		log.Printf("read config failed: %v\n", err)
